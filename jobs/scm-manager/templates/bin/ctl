@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the webapp_ctl script
+export JOB_NAME='scm-manager'
+source /var/vcap/jobs/scm-manager/helpers/ctl_setup.sh $JOB_NAME
+
+export PORT=${PORT:-5000}
+export LANG=en_US.UTF-8
+
+appname=ScmServerDaemon
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE $JOB_NAME
+
+    export JOB_DIR=/var/vcap/jobs/$JOB_NAME
+    export PKG_DIR=/var/vcap/packages/scm-server
+    
+    cd $PKG_DIR
+    exec ./bin/scm-server start >> /var/vcap/sys/log/scm-manager/scm-manager-output.log 2>&1 & 
+
+    # store pid in $PIDFILE
+    echo $( ps auxwww | grep  java | grep ${appname} | awk '{print $2 }' ) > $PIDFILE
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+  *)
+    echo "Usage: cubrid_broker_ctl {start|stop}"
+
+    ;;
+
+esac
+exit 0

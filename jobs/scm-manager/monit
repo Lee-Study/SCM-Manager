@@ -1,0 +1,5 @@
+check process scm-manager
+  with pidfile /var/vcap/sys/run/scm-manager/scm-manager.pid
+  start program "/var/vcap/jobs/scm-manager/bin/monit_debugger ctl '/var/vcap/jobs/scm-manager/bin/ctl start'"
+  stop program "/var/vcap/jobs/scm-manager/bin/monit_debugger ctl '/var/vcap/jobs/scm-manager/bin/ctl stop'"
+  group vcap

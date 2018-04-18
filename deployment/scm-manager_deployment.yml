@@ -1,0 +1,76 @@
+---
+name: paas-ta-scm-manager
+director_uuid: 873c784d-3e91-4c78-95a3-b492024c389f
+compilation:
+  workers: 2
+  network: default
+  cloud_properties:
+    ram: 2048
+    disk: 8096
+    cpu: 2
+update:
+  canaries: 1
+  canary_watch_time: 120000
+  update_watch_time: 120000
+  max_in_flight: 4
+networks:
+- name: default
+  subnets:
+  - cloud_properties:
+      name: Internal
+    dns:
+    - 10.30.20.24
+    - 8.8.8.8
+    gateway: 10.30.20.23
+    name: default_unused
+    range: 10.30.0.0/16
+    reserved:
+    - 10.30.20.0 - 10.30.20.22
+    - 10.30.20.24 - 10.30.20.255
+    - 10.30.40.0 - 10.30.40.255
+    - 10.30.60.0 - 10.30.111.119
+    static:
+    - 10.30.111.120
+- name: op_public_network
+  type: manual
+  subnets:
+  - cloud_properties:
+      name: External
+    dns:
+    - 8.8.8.8
+    gateway: 115.68.46.177
+    range: 115.68.46.176/28
+    static:
+    - 115.68.46.189
+resource_pools:
+- name: resource_pools
+  network: default
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+    version: 3309
+    env:
+      bosh:
+        password: $6$4gDD3aV0rdqlrKC$2axHCxGKIObs6tAmMTqYCspcdvQXh3JJcvWOY2WGb4SrdXtnCyNaWlrf3WEqvYR2MYizEGp3kMmbpwBC6jsHt0
+
+  cloud_properties:
+    cpu: 1
+    disk: 8192
+    ram: 2048
+jobs:
+- name: paas-ta-scm-manager
+  template: scm-manager
+  instances: 1
+  resource_pool: resource_pools
+  persistent_disk: 10240
+  networks:
+  - name: default
+    static_ips:
+    - 10.30.111.120
+  - name: op_public_network
+    default:
+    - dns
+    - gateway
+    static_ips: 115.68.46.189
+releases:
+- name: scm-manager
+  version: latest

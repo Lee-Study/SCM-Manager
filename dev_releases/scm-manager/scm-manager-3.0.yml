@@ -1,0 +1,21 @@
+---
+packages:
+- name: java8
+  version: 88ff03b20ad2f59840fbb5f74a074ca8fdc68213
+  fingerprint: 88ff03b20ad2f59840fbb5f74a074ca8fdc68213
+  sha1: 8372d88eff23421ac85d16255091cf7bf3af7e63
+  dependencies: []
+- name: scm-server
+  version: 594428973e7646710ab7a4ad008f82955836c511
+  fingerprint: 594428973e7646710ab7a4ad008f82955836c511
+  sha1: 1b3a6b0906a3143bc032998e3460887d843ccbf8
+  dependencies: []
+jobs:
+- name: scm-manager
+  version: 10f0f5cf596888cdcb675d13d0e68b0e0b1a9d61
+  fingerprint: 10f0f5cf596888cdcb675d13d0e68b0e0b1a9d61
+  sha1: 75e89a9197d75cf3ecb1c3a0c01ca6b5fa88106d
+commit_hash: b6db23fe
+uncommitted_changes: true
+name: scm-manager
+version: '3.0'

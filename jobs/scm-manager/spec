@@ -1,0 +1,10 @@
+---
+name: scm-manager
+packages: 
+  - scm-server
+  - java8
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
