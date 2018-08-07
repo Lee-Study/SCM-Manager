@@ -137,7 +137,7 @@
 
 CLI는 BOSH 배포와 Release를 관리하기 위해 도움을 주는 커맨드 라인 명령어로 아래와 같이 구분된다.
 
-- bosh-cli: BOSH (Multi-VM BOSH)를 관리하기 위한 CLI
+- bosh-cli: BOSH를 관리하기 위한 CLI
 
 
 
@@ -294,10 +294,10 @@ CLI는 BOSH 배포와 Release를 관리하기 위해 도움을 주는 커맨드 
 	|**파라미터 명**|**설명**|**필수****(O/X)**|
 	|----------|-------------------------|--------------------------------|
 	|deploymentFile|설치 한 Manfiest 파일|O|
-|--state path|Deployment state 파일 경로|O|
-|-v|Manifest Replace 변수 ex) internal_ip, deployment_name|X|
-|-o|option Manifest File ex) jumpbox-user.yml, uaa.yml…|X|
-|--vars -store path|creds.yml 파일, 인증 키 및 Job Password yml 파일 경로|X|
+	|--state path|Deployment state 파일 경로|O|
+	|-v|Manifest Replace 변수 ex) internal_ip, deployment_name|X|
+	|-o|option Manifest File ex) jumpbox-user.yml, uaa.yml…|X|
+	|--vars -store path|creds.yml 파일, 인증 키 및 Job Password yml 파일 경로|X|
 
 - **사용 예시**
 
